@@ -96,8 +96,8 @@ a:hover .octicon {
 }
 
 a .dash {
-  strokedasharray: '10';
-  strokedashoffset: '10';
+  stroke-dasharray: '10';
+  stroke-dashoffset: '10';
   visibility: hidden;
   transition: 'stroke-dashoffset 0.3s';
 }
