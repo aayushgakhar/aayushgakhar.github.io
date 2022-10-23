@@ -1,0 +1,138 @@
+@import url(https://use.typekit.net/owl5kpo.css?v1.1);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-[raleway] bg-slate-900 text-gray-400;
+  }
+  h1 {
+    @apply font-[Dazzle-unicase];
+  }
+  h2{
+    @apply font-[Dazzle-unicase] text-gray-300;
+  }
+
+  a {
+    @apply text-gray-400;
+    @apply hover:text-gray-500;
+    @apply active:text-violet-600;
+  }
+  input,
+  textarea {
+    @apply text-gray-700;
+  }
+  li {
+    @apply px-4;
+    @apply cursor-pointer;
+    @apply hover:text-gray-500;
+    @apply active:text-violet-600;
+  }
+  section {
+    @apply flex flex-col justify-center;
+    @apply w-full py-20 max-w-5xl px-10 md:px-20;
+  }
+  .active {
+    @apply text-violet-600;
+  }
+}
+
+.tracker{
+  opacity: 0;
+}
+
+body:hover > .tracker {
+  opacity: 1;
+}
+
+.animation {
+  color: theme("colors.transparent");
+   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+   background-clip: text;
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+.animation:hover {
+  animation-duration: 5s;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.card {
+  /* background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 300px; */
+}
+
+.card:hover {
+  background-image: linear-gradient(
+    to right,
+    rgba(112, 157, 255, 0.8),
+    hsla(242, 74%, 61%, 0.8)
+  ) !important;
+}
+
+
+a .octicon {
+  transition: transform 0.2s;
+}
+
+a:hover .octicon {
+  transform: translateX(4px);
+  transition: transform 0.2s;
+}
+
+a .dash {
+  strokedasharray: '10';
+  strokedashoffset: '10';
+  visibility: hidden;
+  transition: 'stroke-dashoffset 0.3s';
+}
+
+a:hover .dash {
+  stroke-dashoffset: 20;
+  visibility: visible;
+}
+
+.icon:hover {
+  filter: drop-shadow(0 0 0.3rem #666);
+}
+
+
+
+.hover-1 {
+  background: linear-gradient(#1095c1 0 0) calc(100% - var(--p, 0%)) /
+    var(--p, 0%) no-repeat;
+  transition: 0.4s, background-position 0s;
+}
+.hover-1:hover {
+  --p: 100%;
+}
+
+.hover-2 {
+  background-image: linear-gradient(theme('colors.violet.600') 0 0);
+  background-size: 200% 0.1em;
+  background-position: 170% 80%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s, background-position 0.3s 0.3s, color 0s;
+}
+.hover-2:hover {
+  transition: background-size 0.3s 0.3s, background-position 0.3s,
+    color 0.3s 0.3s;
+  background-size: 200% 80%;
+  background-position: 100% 80%;
+  color: theme('colors.slate.900') !important;
+}
