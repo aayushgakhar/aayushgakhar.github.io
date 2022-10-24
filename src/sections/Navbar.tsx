@@ -61,7 +61,7 @@ const Navbar = () => {
       >
         <div
           className={
-            'flex flex-col justify-center items-center w-full h-screen backdrop-blur bg-white/60  dark:bg-slate-900/60'
+            'flex flex-col justify-center items-center w-full h-screen backdrop-blur bg-white/90  dark:bg-slate-900/90'
           }
         >
           {navigation.map((item) => (
