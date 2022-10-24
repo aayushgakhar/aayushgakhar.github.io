@@ -5,17 +5,17 @@ const Home = () => {
   return (
     // <div  className='w-full h-auto min-h-screen bg-background'>
 
-    <section className='mx-auto sm sm:pb-20'>
+    <section className='about mx-auto sm sm:pb-20'>
       <div className='animation-wrapper'>
         <div className='animation relative font-[dazzle-unicase] text-4xl w-min sm:text-7xl font-bold'>
           <p className='text-transparent text-lg sm:text-2xl'>Hi, my name is</p>
           Aayush <br /> Gakhar
         </div>
       </div>
-      <h2 className='text-4xl sm:text-7xl font-bold text-gray-400'>
+      <h2 className='text-4xl sm:text-7xl font-bold '>
         I'm a Software Developer
       </h2>
-      <p className='text-[#8892b0] py-4 max-w-[700px]'>
+      <p className='py-4 max-w-[700px]'>
         I'm a software developer with 2 years of coding experience. I am skilled
         in python, java, c and web development including HTML, CSS, JS, React,
         Bootstrap and Tailwind.
@@ -26,7 +26,7 @@ const Home = () => {
             to='work'
             smooth={true}
             duration={500}
-            className='w-fit group border-current border-2 px-6 py-3 flex items-center hover:bg-gray-500 hover:border-transparent hover:text-white'
+            className='w-fit group border-current border-2 px-6 py-3 flex items-center hover:bg-slate-900  dark:hover:bg-slate-500 hover:border-transparent hover:text-white'
           >
             View Work
             <svg
@@ -54,7 +54,7 @@ const Home = () => {
         <div className='inline-block'>
           <a
             href='https://drive.google.com/drive/folders/13HcrwHrLQaYD21GnqePtUKqAcj-pgwQK?usp=sharing'
-            className='w-fit group border-current border-2 px-6 py-3 my-2 flex items-center hover:bg-gray-500 hover:border-transparent hover:text-white'
+            className='w-fit group border-current border-2 px-6 py-3 my-2 flex items-center hover:bg-slate-900  dark:hover:bg-slate-500 hover:border-transparent hover:text-white'
           >
             Resume
             <svg

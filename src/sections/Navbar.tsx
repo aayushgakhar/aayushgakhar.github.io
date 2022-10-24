@@ -19,7 +19,7 @@ const Navbar = () => {
     setNav(!nav)
   }
   return (
-    <div className='sticky top-0 w-full h-[80px] flex justify-between items-center px-4 backdrop-blur bg-slate-900/75 text-gray-300 z-50 border-b-[0.5px] border-gray-700'>
+    <div className='sticky top-0 w-full h-[80px] flex justify-between items-center px-4 backdrop-blur bg-white/75 dark:bg-slate-900/75 z-50 border-b border-gray-700/30'>
       <div>
         <img src={Logo} alt='AG' className='w-[50px]' />
       </div>

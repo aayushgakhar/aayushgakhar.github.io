@@ -29,7 +29,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section className='mx-auto'>
+    <section className='projects mx-auto'>
       {/* <div className=' '> */}
       <div className='pb-8'>
         <h2 className='hover-2 text-4xl font-bold inline'>

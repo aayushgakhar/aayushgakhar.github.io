@@ -47,7 +47,7 @@ const icons = [
 
 const Skills = () => {
   return (
-    <section className='mx-auto'>
+    <section className='skills mx-auto'>
       <div className=''>
         <h2 className='hover-2 text-4xl font-bold inline'>
           Skills

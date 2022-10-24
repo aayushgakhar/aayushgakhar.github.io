@@ -1,5 +1,3 @@
-import './App.css'
-
 import Home from './sections/Home'
 import About from './sections/About'
 import Contact from './sections/Contact'
@@ -7,6 +5,7 @@ import Footer from './sections/Footer'
 import Navbar from './sections/Navbar'
 import Projects from './sections/Projects'
 import Skills from './sections/Skills'
+import Sidebar from './sections/Sidebar'
 
 
 
@@ -14,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
+      <Sidebar/>
       <Home />
       <About />
       <Skills />
