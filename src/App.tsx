@@ -5,7 +5,6 @@ import Footer from './sections/Footer'
 import Navbar from './sections/Navbar'
 import Projects from './sections/Projects'
 import Skills from './sections/Skills'
-import Sidebar from './sections/Sidebar'
 
 
 
