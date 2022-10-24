@@ -3,34 +3,15 @@ import { HiExternalLink } from "react-icons/hi";
 import { Transition } from "@headlessui/react";
 
 const Card = ({ project }: any) => {
-  var [hov, sethov] = useState(false)
-  const mouseEnter = () => {
-    sethov(true)
-  }
-  const mouseLeave = () => {
-    sethov(false)
-  }
 
   return (
     <div
       // ref={domRef}
-      onMouseEnter={mouseEnter}
-      onMouseLeave={mouseLeave}
       style={{ backgroundImage: `url(${project.img})` }}
       className={
-        'transition shadow-lg container rounded-md mx-auto bg-no-repeat bg-center bg-cover hover:scale-[1.01] duration-500 h-[250px] '
+        'opacity-100 transition shadow-lg container rounded-md mx-auto bg-no-repeat bg-center bg-cover hover:scale-[1.01] duration-300 h-[250px] '
       }
     >
-      <Transition
-        className='absolute top-0 left-0 w-full h-full'
-        show={hov}
-        enter="transition ease-out duration-300"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-101"
-        leave="transition ease-in duration-200"
-        leaveFrom="transform opacity-100 scale-101"
-        leaveTo="transform opacity-0 scale-95"
-      >
         <div className='rounded-md h-full w-full opacity-0 hover:opacity-100 focus:opacity-100 transition-opacity duration-300 flex flex-col justify-center align-middle text-center bg-gradient-to-br from-sky-500/90 to-indigo-500/90'>
           <span className='text-2xl font-bold text-white tracking-wider'>
             {project.name}
@@ -47,7 +28,6 @@ const Card = ({ project }: any) => {
             </a>
           </div>
         </div>
-      </Transition>
     </div>
   );
 };
