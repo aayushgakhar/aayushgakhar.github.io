@@ -23,7 +23,7 @@ const Home = () => {
       <div>
         <div className='sm:inline-block p-0 mr-5'>
           <Link
-            to='work'
+            to='projects'
             smooth={true}
             duration={500}
             className='w-fit group border-current border-2 px-6 py-3 flex items-center hover:bg-slate-900  dark:hover:bg-slate-500 hover:border-transparent hover:text-white'
