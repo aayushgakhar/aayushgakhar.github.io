@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-scroll';
 
 const Home = () => {
@@ -38,6 +38,9 @@ const Home = () => {
       }
     }, 30);
   };
+  useEffect(() => {
+    f();
+  }, []);
   return (
     // <div  className='w-full h-auto min-h-screen bg-background'>
 
@@ -45,7 +48,7 @@ const Home = () => {
       <div className='animation-wrapper'>
         <div className='animation relative font-[dazzle-unicase] text-4xl w-min sm:text-7xl font-bold'>
           <p className='text-transparent text-lg sm:text-2xl'>Hi, my name is</p>
-          <p className='name-random' onMouseOver={f}>
+          <p className='name-random' onMouseOver={f} on>
             {fn} <br /> {ln}
           </p>
         </div>
