@@ -50,9 +50,9 @@ body:hover > .tracker {
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }
-.animation:hover {
+/* .animation:hover {
   animation-duration: 5s;
-}
+} */
 
 @keyframes gradient {
     0% {

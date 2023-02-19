@@ -1,7 +1,43 @@
-import React from "react";
-import { Link } from "react-scroll";
+import React from 'react';
+import { Link } from 'react-scroll';
 
 const Home = () => {
+  var [fn, setfn] = React.useState('Aayush');
+  var [ln, setln] = React.useState('Gakhar');
+  var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var f = () => {
+    let fn_ = "Aayush";
+    let ln_ = "Gakhar";
+    let iterations = 0;
+    const interval = setInterval(() => {
+      setfn(
+        fn
+          .split('')
+          .map((letter, index) => {
+            if (index<iterations) {
+              return fn_[index];
+            }
+            return letters[Math.floor(Math.random() * 26)]
+          })
+          .join('')
+      );
+      setln(
+        ln
+          .split('')
+          .map((letter, index) => {
+            if (index < iterations-6) {
+              return ln_[index];
+            }
+            return letters[Math.floor(Math.random() * 26)];
+          })
+          .join('')
+      );
+      iterations+=1/2;
+      if (iterations > 12) {
+        clearInterval(interval);
+      }
+    }, 30);
+  };
   return (
     // <div  className='w-full h-auto min-h-screen bg-background'>
 
@@ -9,7 +45,9 @@ const Home = () => {
       <div className='animation-wrapper'>
         <div className='animation relative font-[dazzle-unicase] text-4xl w-min sm:text-7xl font-bold'>
           <p className='text-transparent text-lg sm:text-2xl'>Hi, my name is</p>
-          Aayush <br /> Gakhar
+          <p className='name-random' onMouseOver={f}>
+            {fn} <br /> {ln}
+          </p>
         </div>
       </div>
       <h2 className='text-4xl sm:text-7xl font-bold '>
@@ -23,7 +61,7 @@ const Home = () => {
       <div>
         <div className='sm:inline-block p-0 mr-5'>
           <Link
-            to='work'
+            to='projects'
             smooth={true}
             duration={500}
             className='w-fit group border-current border-2 px-6 py-3 flex items-center hover:bg-slate-900  dark:hover:bg-slate-500 hover:border-transparent hover:text-white'
@@ -45,8 +83,8 @@ const Home = () => {
                 className='dash'
                 stroke='currentColor'
                 d='M1.75 8H11'
-                stroke-width='1.5'
-                stroke-linecap='round'
+                strokeWidth='1.5'
+                strokeLinecap='round'
               ></path>
             </svg>
           </Link>
@@ -73,8 +111,8 @@ const Home = () => {
                 className='dash'
                 stroke='currentColor'
                 d='M1.75 8H11'
-                stroke-width='1.5'
-                stroke-linecap='round'
+                strokeWidth='1.5'
+                strokeLinecap='round'
               ></path>
             </svg>
           </a>

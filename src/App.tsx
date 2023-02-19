@@ -7,14 +7,13 @@ import Projects from './sections/Projects'
 import Skills from './sections/Skills'
 
 
-
 function App() {
   return (
     <div className="App">
       <Navbar />
       {/* <Sidebar/> */}
       <Home />
-      <About />
+      {/* <About /> */}
       <Skills />
       <Projects />
       <Contact />
