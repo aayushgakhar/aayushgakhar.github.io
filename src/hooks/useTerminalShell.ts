@@ -18,6 +18,21 @@ const RESET = '\x1b[0m'
 
 const HOME = '/home/user'
 
+const quickCommands = [
+  'help',
+  'whoami',
+  'skills',
+  'experience',
+  'projects',
+  'contact',
+  'uptime',
+  'ls',
+  'cat',
+  'tree',
+  'grep',
+  'clear',
+]
+
 const aboutText = [`# ${profile.name}`, profile.role, '', ...profile.summary].join(
   '\n',
 )
@@ -78,6 +93,7 @@ export function useTerminalShell() {
   const busyRef = useRef(false)
   const preInputScrollTopRef = useRef<number | null>(null)
   const commandNamesRef = useRef<string[]>([])
+  const helpTextRef = useRef('')
 
   const prompt = useCallback(
     () => `${GREEN}➜${RESET}  ${CYAN}${currentDirLabel(cwdRef.current)}${RESET} `,
@@ -119,6 +135,13 @@ export function useTerminalShell() {
 
       if (input === 'clear') {
         term.write('\x1b[2J\x1b[3J\x1b[H')
+        return
+      }
+
+      // The shell's built-in `help` lists builtins it doesn't implement, so we
+      // intercept it and print the commands that actually work.
+      if (input === 'help' || input.startsWith('help ')) {
+        writeStream(helpTextRef.current)
         return
       }
 
@@ -166,7 +189,8 @@ export function useTerminalShell() {
 
     let candidates: string[]
     if (isCommand) {
-      candidates = commandNamesRef.current
+      candidates =
+        prefix === '' ? quickCommands : commandNamesRef.current
     } else {
       try {
         const bash = await bashRef.current
@@ -230,6 +254,33 @@ export function useTerminalShell() {
       wt.element.addEventListener('paste', recordScroll, true)
 
       bashRef.current = import('just-bash/browser').then(({ Bash, defineCommand, getCommandNames }) => {
+        // Commands that rely on Node APIs (node:zlib) and don't work in browsers.
+        const unavailable = new Set(['gzip', 'gunzip', 'zcat'])
+        const shellCommands = getCommandNames().filter(
+          (name) => !unavailable.has(name),
+        )
+
+        const portfolio: [string, string][] = [
+          ['whoami', 'who is behind this'],
+          ['skills', 'technologies I use'],
+          ['experience', 'where I have worked'],
+          ['projects', 'selected projects'],
+          ['contact', 'how to reach me'],
+          ['uptime', 'platform status'],
+          ['ls / tree', 'list the files'],
+          ['cat <file>', 'read a portfolio file'],
+        ]
+
+        const helpText = [
+          `${BOLD}Portfolio${RESET}`,
+          ...portfolio.map(
+            ([name, text]) =>
+              `  ${GREEN}${name.padEnd(11)}${RESET}${DIM}${text}${RESET}`,
+          ),
+          '',
+          `${DIM}Use Tab to autocomplete · clear to reset.${RESET}`,
+        ].join('\n')
+
         const commands = [
           defineCommand('skills', async () => ({
             stdout: `${skillsText}\n`,
@@ -262,8 +313,9 @@ export function useTerminalShell() {
             exitCode: 0,
           })),
         ]
+        helpTextRef.current = helpText
         commandNamesRef.current = [
-          ...getCommandNames(),
+          ...shellCommands,
           'skills',
           'experience',
           'projects',

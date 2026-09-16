@@ -49,7 +49,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="caret mt-3 font-mono text-lg text-emerald-600 sm:text-xl dark:text-emerald-400"
+            className="mt-3 font-mono text-lg text-emerald-600 sm:text-xl dark:text-emerald-400"
           >
             {profile.role}
           </motion.p>
