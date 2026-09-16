@@ -1,86 +1,112 @@
-import React, { useState } from 'react'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { AnimatePresence, motion } from 'motion/react'
+import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
+import { ThemeToggle } from '../components/ThemeToggle'
+import { profile } from '../data/portfolio'
+import { useActiveSection } from '../hooks/useActiveSection'
 
-import { Transition } from '@headlessui/react';
+const NAV = [
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'activity', label: 'Activity' },
+  { id: 'contact', label: 'Contact' },
+] as const
 
-import Logo from '../assets/AG-logos_transparent.png'
+const NAV_IDS = NAV.map((item) => item.id)
 
-// eslint-disable-next-line
-import { Link } from 'react-scroll';
+export function Navbar() {
+  const [open, setOpen] = useState(false)
+  const active = useActiveSection(NAV_IDS)
 
-const navigation = [
-  { name: 'About', href: '#about', current: true, offset: -80 },
-  { name: 'Skills', href: '#skills', current: false, offset: -80 },
-  { name: 'Projects', href: '#projects', current: false, offset: -80 },
-  { name: 'Contact', href: '#contact', current: true, offset: -80 }
-]
-
-const Navbar = () => {
-  const [nav, setNav] = useState(false)
-  const handleClick = () => {
-    setNav(!nav)
-  }
   return (
-    <div className='sticky top-0 w-full h-[80px] flex justify-between items-center px-4 backdrop-blur bg-white/75 dark:bg-slate-900/75 z-50 border-b border-slate-700/30 dark:border-slate-400/30'>
-      <div>
-        <img src={Logo} alt='AG' className='w-[50px]' />
-      </div>
-      {/* menu */}
-      <ul className='hidden sm:flex'>
-        {navigation.map((item) => (
-          <li key={item.name} className='px-4'>
-            <Link
-              activeClass='active'
-              to={item.name.toLowerCase()}
-              spy={true}
-              smooth={true}
-              offset={item.offset}
-              duration={300}
+    <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-zinc-50/80 backdrop-blur-xl dark:border-white/5 dark:bg-[#09090b]/80">
+      <nav className="layout flex h-16 items-center justify-between">
+        <a href="#top" className="flex items-center gap-2.5">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500 font-mono text-sm font-bold text-zinc-950">
+            AG
+          </span>
+          <span className="hidden font-mono text-sm text-zinc-600 sm:block dark:text-zinc-300">
+            {profile.name.toLowerCase().replace(' ', '_')}
+          </span>
+        </a>
+
+        <div className="hidden items-center gap-1 md:flex">
+          {NAV.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                active === item.id
+                  ? 'text-emerald-600 dark:text-emerald-400'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'
+              }`}
             >
-              {item.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      {/* hamburger */}
-      <div onClick={handleClick} className='sm:hidden z-10'>
-        {!nav ? <FaBars /> : <FaTimes className='text-lg ' />}
-      </div>
-
-      {/* mobile menu */}
-      <Transition
-        className='sm:hidden fixed top-0 left-0 w-full h-full'
-        show={nav}
-        enter='transition ease-out duration-300'
-        enterFrom='transform opacity-0 scale-95'
-        enterTo='transform opacity-100 scale-100'
-        leave='transition ease-in duration-200'
-        leaveFrom='transform opacity-100 scale-100'
-        leaveTo='transform opacity-0 scale-95'
-      >
-        <div
-          className={
-            'flex flex-col justify-center items-center w-full h-screen backdrop-blur bg-white/90  dark:bg-slate-900/90'
-          }
-        >
-          {navigation.map((item) => (
-            <div key={item.name} className='py-6 text-4xl'>
-              <Link
-                onClick={handleClick}
-                to={item.name.toLowerCase()}
-                smooth={true}
-                duration={500}
-                offset={item.offset}
-              >
-                {item.name}
-              </Link>
-            </div>
+              <span className="font-mono text-emerald-600 dark:text-emerald-400">
+                0{NAV.indexOf(item) + 1}.
+              </span>{' '}
+              {item.label}
+            </a>
           ))}
         </div>
-      </Transition>
-    </div>
-  );
-}
 
-export default Navbar
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn-ghost hidden px-4 py-2 sm:inline-flex"
+          >
+            Resume
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            aria-label="Toggle navigation"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 text-zinc-600 md:hidden dark:border-white/10 dark:text-zinc-300"
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-zinc-200/70 bg-zinc-50 md:hidden dark:border-white/5 dark:bg-[#09090b]"
+          >
+            <div className="layout flex flex-col py-3">
+              {NAV.map((item, index) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-2 py-3 text-sm font-medium text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-white/5"
+                >
+                  <span className="font-mono text-emerald-600 dark:text-emerald-400">
+                    0{index + 1}.
+                  </span>{' '}
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-ghost mt-2"
+              >
+                Resume
+              </a>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </header>
+  )
+}
